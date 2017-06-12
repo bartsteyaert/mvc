@@ -1,0 +1,100 @@
+﻿@model int?
+@{
+    ViewBag.Title = "Index";
+}
+<div class="jumbotron">
+    <h1>Het Cultuurhuis <img src="~/Images/voorstellingen.png" alt="voorstellingen" /></h1>
+    <p></p>
+    @if (ViewBag.mandjeTonen)
+    {
+        <a href="@Url.Action("Mandje", "Home")" class="btn btn-primary btn-lg">Winkelmandje &raquo;</a>
+        <a href="@Url.Action("Bevestiging", "Home")" class="btn btn-primary btn-lg">Kassa &raquo;</a>
+    }
+</div>
+
+@if (!Model.HasValue)
+{
+    <div id="kiesgenre" class="lead alert alert-info">
+        <p>Kies een voorstellingsgenre</p>
+    </div>
+}
+
+
+<div class="well">@Html.Action("GenreLijst", new { gekozenGenre = Model })</div>
+
+<div id="lijst">
+    @if (Model.HasValue)
+    {
+        @Html.Action("GetVoorstellingenVanGenre", new { gekozenGenre = Model })
+    }
+</div>
+
+@*<ul class="nav nav-pills">
+        @foreach(var genre in Model.Genres)
+        {
+            var url = Url.Action("Index", "Home", new { id = genre.GenreNr });
+            if(Model.Genre!=null && Model.Genre.GenreNaam.Equals(genre.GenreNaam))
+            {
+                <li class="active">
+                    <a href="@url">@genre.GenreNaam</a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a href="@url">@genre.GenreNaam</a>
+                </li>
+            }
+        }
+    </ul>
+
+    @if(Model.Genre !=null)
+    {
+        <br />
+        if (Model.Voorstellingen.Count() > 0)
+        {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Datum</th>
+                    <th>Titel</th>
+                    <th>Uitvoerders</th>
+                    <th class="rechts">Prijs</th>
+                    <th class="rechts">Vrije plaatsen</th>
+                    <th>Reserveren</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var voorstelling in Model.Voorstellingen)
+                {
+                    <tr>
+                        <td class="col-md-2">@Html.DisplayFor(m => voorstelling.Datum)</td>
+                        <td class="col-md-3">@voorstelling.Titel</td>
+                        <td class="col-md-3">@voorstelling.Uitvoerders</td>
+                        <td class="col-md-1 rechts">@Html.DisplayFor(m => voorstelling.Prijs)</td>
+                        <td class="col-md-2 rechts">@Html.DisplayFor(m => voorstelling.VrijePlaatsen)</td>
+                        @if (voorstelling.VrijePlaatsen > 0)
+                        {
+                            var urlReserveren = Url.Action("Reserveren", "Home", new { id = voorstelling.VoorstellingsNr });
+                            <td class="col-md-1">
+                                <a href="@urlReserveren">Reserveren</a>
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="col-md-1">
+                                <span class="label label-danger">uitverkocht</span>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+        }
+        else
+        {
+            <p class="alert alert-warning">
+                Er zijn geen voorstellingen van dit genre beschikbaar.
+            </p>
+        }
+    }*@

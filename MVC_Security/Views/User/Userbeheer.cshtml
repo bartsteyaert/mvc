@@ -1,0 +1,28 @@
+﻿@model System.Data.Entity.IDbSet<MVC_Security.Models.ApplicationUser>
+@{
+    ViewBag.Title = "Userbeheer";
+}
+
+<h2>Userbeheer</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Delete user</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var gebruiker in Model)
+        {
+            <tr>
+                <td>@gebruiker.Id</td>
+                <td>@Html.ActionLink(gebruiker.UserName, "UserDetail", new { id=gebruiker.Id})</td>
+                <td align="center">
+                    <a href="@Url.Action("VerwijderUser", new { id=gebruiker.Id})"><img src="~/Images/delete.png" alt="verwijderen" /></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

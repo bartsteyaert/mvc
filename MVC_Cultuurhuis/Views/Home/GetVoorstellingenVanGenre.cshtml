@@ -1,0 +1,47 @@
+﻿@model List<MVC_Cultuurhuis.Models.Voorstelling>
+@if (Model.Count()>0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Datum</th>
+                <th>Titel</th>
+                <th>Uitvoerders</th>
+                <th class="rechts">Prijs</th>
+                <th class="rechts">Vrije plaatsen</th>
+                <th>Reserveren</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var voorstelling in Model)
+            {
+                <tr>
+                    <td class="col-md-2">@Html.DisplayFor(m => voorstelling.Datum)</td>
+                    <td class="col-md-3">@voorstelling.Titel</td>
+                    <td class="col-md-3">@voorstelling.Uitvoerders</td>
+                    <td class="col-md-1 rechts">@Html.DisplayFor(m => voorstelling.Prijs)</td>
+                    <td class="col-md-2 rechts">@Html.DisplayFor(m => voorstelling.VrijePlaatsen)</td>
+                    @if (voorstelling.VrijePlaatsen > 0)
+                    {
+                        var urlReserveren = Url.Action("Reserveren", "Home", new { id = voorstelling.VoorstellingsNr });
+                        <td class="col-md-1">
+                            <a href="@urlReserveren">Reserveren</a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="col-md-1">
+                            <span class="label label-danger">uitverkocht</span>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="alert alert-warning">
+        Er zijn geen voorstellingen van dit genre beschikbaar.
+    </p>
+}

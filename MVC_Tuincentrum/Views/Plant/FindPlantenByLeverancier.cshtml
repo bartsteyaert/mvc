@@ -1,0 +1,31 @@
+﻿@model IEnumerable<MVC_Tuincentrum.Models.Plant>
+
+@{
+    ViewBag.Title = "Planten van een leverancier";
+}
+
+<h2>Planten van een leverancier</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Naam</td>
+            <td>Soort</td>
+            <td>Leverancier</td>
+            <td>Kleur</td>
+            <td>Prijs</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem=> item.Naam)</td>
+                <td>@Html.DisplayFor(modelItem => item.Soort.Naam)</td>
+                <td>@Html.DisplayFor(modelItem => item.Leverancier.Naam)</td>
+                <td>@Html.DisplayFor(modelItem => item.Kleur)</td>
+                <td>@Html.DisplayFor(modelItem => item.VerkoopPrijs)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

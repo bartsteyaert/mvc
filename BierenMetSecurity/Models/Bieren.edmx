@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MVCBierenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bieren">
+          <Key>
+            <PropertyRef Name="BierNr" />
+          </Key>
+          <Property Name="BierNr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naam" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="BrouwerNr" Type="int" Nullable="false" />
+          <Property Name="SoortNr" Type="int" Nullable="false" />
+          <Property Name="Alcohol" Type="real" />
+        </EntityType>
+        <EntityType Name="Brouwers">
+          <Key>
+            <PropertyRef Name="BrouwerNr" />
+          </Key>
+          <Property Name="BrouwerNr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BrNaam" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adres" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PostCode" Type="smallint" Nullable="false" />
+          <Property Name="Gemeente" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Omzet" Type="int" />
+        </EntityType>
+        <EntityType Name="Soorten">
+          <Key>
+            <PropertyRef Name="SoortNr" />
+          </Key>
+          <Property Name="SoortNr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Soort" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="Bieren$BrouwersBieren">
+          <End Role="Brouwers" Type="Self.Brouwers" Multiplicity="1" />
+          <End Role="Bieren" Type="Self.Bieren" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brouwers">
+              <PropertyRef Name="BrouwerNr" />
+            </Principal>
+            <Dependent Role="Bieren">
+              <PropertyRef Name="BrouwerNr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Bieren$SoortenBieren">
+          <End Role="Soorten" Type="Self.Soorten" Multiplicity="1" />
+          <End Role="Bieren" Type="Self.Bieren" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Soorten">
+              <PropertyRef Name="SoortNr" />
+            </Principal>
+            <Dependent Role="Bieren">
+              <PropertyRef Name="SoortNr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MVCBierenModelStoreContainer">
+          <EntitySet Name="Bieren" EntityType="Self.Bieren" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Brouwers" EntityType="Self.Brouwers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Soorten" EntityType="Self.Soorten" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Bieren$BrouwersBieren" Association="Self.Bieren$BrouwersBieren">
+            <End Role="Brouwers" EntitySet="Brouwers" />
+            <End Role="Bieren" EntitySet="Bieren" />
+          </AssociationSet>
+          <AssociationSet Name="Bieren$SoortenBieren" Association="Self.Bieren$SoortenBieren">
+            <End Role="Soorten" EntitySet="Soorten" />
+            <End Role="Bieren" EntitySet="Bieren" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MVCBierenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bier">
+          <Key>
+            <PropertyRef Name="BierNr" />
+          </Key>
+          <Property Name="BierNr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naam" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BrouwerNr" Type="Int32" Nullable="false" />
+          <Property Name="SoortNr" Type="Int32" Nullable="false" />
+          <Property Name="Alcohol" Type="Single" />
+          <NavigationProperty Name="Brouwer" Relationship="Self.Bieren_BrouwersBieren" FromRole="Bieren" ToRole="Brouwers" />
+          <NavigationProperty Name="Soort" Relationship="Self.Bieren_SoortenBieren" FromRole="Bieren" ToRole="Soorten" />
+        </EntityType>
+        <EntityType Name="Brouwer">
+          <Key>
+            <PropertyRef Name="BrouwerNr" />
+          </Key>
+          <Property Name="BrouwerNr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BrNaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Adres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PostCode" Type="Int16" Nullable="false" />
+          <Property Name="Gemeente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Omzet" Type="Int32" />
+          <NavigationProperty Name="Bieren" Relationship="Self.Bieren_BrouwersBieren" FromRole="Brouwers" ToRole="Bieren" />
+        </EntityType>
+        <EntityType Name="Soort">
+          <Key>
+            <PropertyRef Name="SoortNr" />
+          </Key>
+          <Property Name="SoortNr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SoortNaam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Bieren" Relationship="Self.Bieren_SoortenBieren" FromRole="Soorten" ToRole="Bieren" />
+        </EntityType>
+        <Association Name="Bieren_BrouwersBieren">
+          <End Role="Brouwers" Type="MVCBierenModel.Brouwer" Multiplicity="1" />
+          <End Role="Bieren" Type="MVCBierenModel.Bier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brouwers">
+              <PropertyRef Name="BrouwerNr" />
+            </Principal>
+            <Dependent Role="Bieren">
+              <PropertyRef Name="BrouwerNr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Bieren_SoortenBieren">
+          <End Role="Soorten" Type="MVCBierenModel.Soort" Multiplicity="1" />
+          <End Role="Bieren" Type="MVCBierenModel.Bier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Soorten">
+              <PropertyRef Name="SoortNr" />
+            </Principal>
+            <Dependent Role="Bieren">
+              <PropertyRef Name="SoortNr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BierenEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bieren" EntityType="MVCBierenModel.Bier" />
+          <EntitySet Name="Brouwers" EntityType="MVCBierenModel.Brouwer" />
+          <EntitySet Name="Soorten" EntityType="MVCBierenModel.Soort" />
+          <AssociationSet Name="Bieren_BrouwersBieren" Association="Self.Bieren_BrouwersBieren">
+            <End Role="Brouwers" EntitySet="Brouwers" />
+            <End Role="Bieren" EntitySet="Bieren" />
+          </AssociationSet>
+          <AssociationSet Name="Bieren_SoortenBieren" Association="Self.Bieren_SoortenBieren">
+            <End Role="Soorten" EntitySet="Soorten" />
+            <End Role="Bieren" EntitySet="Bieren" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MVCBierenModelStoreContainer" CdmEntityContainer="BierenEntities">
+          <EntitySetMapping Name="Bieren">
+            <EntityTypeMapping TypeName="MVCBierenModel.Bier">
+              <MappingFragment StoreEntitySet="Bieren">
+                <ScalarProperty Name="BierNr" ColumnName="BierNr" />
+                <ScalarProperty Name="Naam" ColumnName="Naam" />
+                <ScalarProperty Name="BrouwerNr" ColumnName="BrouwerNr" />
+                <ScalarProperty Name="SoortNr" ColumnName="SoortNr" />
+                <ScalarProperty Name="Alcohol" ColumnName="Alcohol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Brouwers">
+            <EntityTypeMapping TypeName="MVCBierenModel.Brouwer">
+              <MappingFragment StoreEntitySet="Brouwers">
+                <ScalarProperty Name="BrouwerNr" ColumnName="BrouwerNr" />
+                <ScalarProperty Name="BrNaam" ColumnName="BrNaam" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="Gemeente" ColumnName="Gemeente" />
+                <ScalarProperty Name="Omzet" ColumnName="Omzet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Soorten">
+            <EntityTypeMapping TypeName="MVCBierenModel.Soort">
+              <MappingFragment StoreEntitySet="Soorten">
+                <ScalarProperty Name="SoortNr" ColumnName="SoortNr" />
+                <ScalarProperty Name="SoortNaam" ColumnName="Soort" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

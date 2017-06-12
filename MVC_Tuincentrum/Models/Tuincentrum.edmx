@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MVCTuinCentrumModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Leveranciers">
+          <Key>
+            <PropertyRef Name="LevNr" />
+          </Key>
+          <Property Name="LevNr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naam" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Adres" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="PostNr" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Woonplaats" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Planten">
+          <Key>
+            <PropertyRef Name="PlantNr" />
+          </Key>
+          <Property Name="PlantNr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naam" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="SoortNr" Type="int" Nullable="false" />
+          <Property Name="Levnr" Type="int" Nullable="false" />
+          <Property Name="Kleur" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="VerkoopPrijs" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Soorten">
+          <Key>
+            <PropertyRef Name="SoortNr" />
+          </Key>
+          <Property Name="SoortNr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Soort" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MagazijnNr" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <Association Name="Planten$LeveranciersPlanten">
+          <End Role="Leveranciers" Type="Self.Leveranciers" Multiplicity="1" />
+          <End Role="Planten" Type="Self.Planten" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Leveranciers">
+              <PropertyRef Name="LevNr" />
+            </Principal>
+            <Dependent Role="Planten">
+              <PropertyRef Name="Levnr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Planten$SoortenPlanten">
+          <End Role="Soorten" Type="Self.Soorten" Multiplicity="1" />
+          <End Role="Planten" Type="Self.Planten" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Soorten">
+              <PropertyRef Name="SoortNr" />
+            </Principal>
+            <Dependent Role="Planten">
+              <PropertyRef Name="SoortNr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MVCTuinCentrumModelStoreContainer">
+          <EntitySet Name="Leveranciers" EntityType="Self.Leveranciers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Planten" EntityType="Self.Planten" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Soorten" EntityType="Self.Soorten" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Planten$LeveranciersPlanten" Association="Self.Planten$LeveranciersPlanten">
+            <End Role="Leveranciers" EntitySet="Leveranciers" />
+            <End Role="Planten" EntitySet="Planten" />
+          </AssociationSet>
+          <AssociationSet Name="Planten$SoortenPlanten" Association="Self.Planten$SoortenPlanten">
+            <End Role="Soorten" EntitySet="Soorten" />
+            <End Role="Planten" EntitySet="Planten" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MVCTuinCentrumModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Leverancier">
+          <Key>
+            <PropertyRef Name="LevNr" />
+          </Key>
+          <Property Name="LevNr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naam" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Adres" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PostNr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Woonplaats" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Planten" Relationship="Self.Planten_LeveranciersPlanten" FromRole="Leveranciers" ToRole="Planten" />
+        </EntityType>
+        <EntityType Name="Plant">
+          <Key>
+            <PropertyRef Name="PlantNr" />
+          </Key>
+          <Property Name="PlantNr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naam" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SoortNr" Type="Int32" Nullable="false" />
+          <Property Name="Levnr" Type="Int32" Nullable="false" />
+          <Property Name="Kleur" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="VerkoopPrijs" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Leverancier" Relationship="Self.Planten_LeveranciersPlanten" FromRole="Planten" ToRole="Leveranciers" />
+          <NavigationProperty Name="Soort" Relationship="Self.Planten_SoortenPlanten" FromRole="Planten" ToRole="Soorten" />
+        </EntityType>
+        <EntityType Name="Soort">
+          <Key>
+            <PropertyRef Name="SoortNr" />
+          </Key>
+          <Property Name="SoortNr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naam" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MagazijnNr" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Planten" Relationship="Self.Planten_SoortenPlanten" FromRole="Soorten" ToRole="Planten" />
+        </EntityType>
+        <Association Name="Planten_LeveranciersPlanten">
+          <End Role="Leveranciers" Type="MVCTuinCentrumModel.Leverancier" Multiplicity="1" />
+          <End Role="Planten" Type="MVCTuinCentrumModel.Plant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Leveranciers">
+              <PropertyRef Name="LevNr" />
+            </Principal>
+            <Dependent Role="Planten">
+              <PropertyRef Name="Levnr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Planten_SoortenPlanten">
+          <End Role="Soorten" Type="MVCTuinCentrumModel.Soort" Multiplicity="1" />
+          <End Role="Planten" Type="MVCTuinCentrumModel.Plant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Soorten">
+              <PropertyRef Name="SoortNr" />
+            </Principal>
+            <Dependent Role="Planten">
+              <PropertyRef Name="SoortNr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TuinCentrumEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Leveranciers" EntityType="MVCTuinCentrumModel.Leverancier" />
+          <EntitySet Name="Planten" EntityType="MVCTuinCentrumModel.Plant" />
+          <EntitySet Name="Soorten" EntityType="MVCTuinCentrumModel.Soort" />
+          <AssociationSet Name="Planten_LeveranciersPlanten" Association="Self.Planten_LeveranciersPlanten">
+            <End Role="Leveranciers" EntitySet="Leveranciers" />
+            <End Role="Planten" EntitySet="Planten" />
+          </AssociationSet>
+          <AssociationSet Name="Planten_SoortenPlanten" Association="Self.Planten_SoortenPlanten">
+            <End Role="Soorten" EntitySet="Soorten" />
+            <End Role="Planten" EntitySet="Planten" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MVCTuinCentrumModelStoreContainer" CdmEntityContainer="TuinCentrumEntities">
+          <EntitySetMapping Name="Leveranciers">
+            <EntityTypeMapping TypeName="MVCTuinCentrumModel.Leverancier">
+              <MappingFragment StoreEntitySet="Leveranciers">
+                <ScalarProperty Name="LevNr" ColumnName="LevNr" />
+                <ScalarProperty Name="Naam" ColumnName="Naam" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="PostNr" ColumnName="PostNr" />
+                <ScalarProperty Name="Woonplaats" ColumnName="Woonplaats" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Planten">
+            <EntityTypeMapping TypeName="MVCTuinCentrumModel.Plant">
+              <MappingFragment StoreEntitySet="Planten">
+                <ScalarProperty Name="PlantNr" ColumnName="PlantNr" />
+                <ScalarProperty Name="Naam" ColumnName="Naam" />
+                <ScalarProperty Name="SoortNr" ColumnName="SoortNr" />
+                <ScalarProperty Name="Levnr" ColumnName="Levnr" />
+                <ScalarProperty Name="Kleur" ColumnName="Kleur" />
+                <ScalarProperty Name="VerkoopPrijs" ColumnName="VerkoopPrijs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Soorten">
+            <EntityTypeMapping TypeName="MVCTuinCentrumModel.Soort">
+              <MappingFragment StoreEntitySet="Soorten">
+                <ScalarProperty Name="SoortNr" ColumnName="SoortNr" />
+                <ScalarProperty Name="Naam" ColumnName="Soort" />
+                <ScalarProperty Name="MagazijnNr" ColumnName="MagazijnNr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

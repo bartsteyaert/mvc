@@ -1,0 +1,35 @@
+﻿@model List<MVC_Cultuurhuis.Models.MandjeItem>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Titel</th>
+            <th>Uitvoerders</th>
+            <th class="rechts">Prijs</th>
+            <th class="rechts">Plaatsen</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="col-md-2">@Html.DisplayFor(m => item.Datum)</td>
+                <td class="col-md-3">@item.Titel</td>
+                <td class="col-md-3">@item.Uitvoerders</td>
+                <td class="col-md-1 rechts">@Html.DisplayFor(m => item.Prijs)</td>
+                <td class="col-md-1 rechts">@item.Plaatsen</td>
+                <td class="col-md-2 text-center">
+                    <input type="checkbox" name="@item.VoorstellingsNr" />
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="6"></td>
+        </tr>
+    </tfoot>
+</table>
+<p class="alert alert-info" style="margin-top:60px;">Te betalen: @(string.Format("{0:€ #,##0.00}", ViewBag.teBetalen))</p>

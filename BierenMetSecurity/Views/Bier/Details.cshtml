@@ -1,0 +1,50 @@
+﻿@model BierenMetSecurity.Models.Bier
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Bier</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Naam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Naam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Alcohol)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Alcohol)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Brouwer.BrNaam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Brouwer.BrNaam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Soort.SoortNaam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Soort.SoortNaam)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BierNr }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

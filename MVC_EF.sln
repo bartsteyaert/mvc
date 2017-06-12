@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC_Tuincentrum", "MVC_Tuincentrum\MVC_Tuincentrum.csproj", "{65822852-F591-4BB5-B3ED-629A95FC65B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC_Areas", "MVC_Areas\MVC_Areas.csproj", "{4C3AD215-1573-4B19-A861-7D2ADEC3A286}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC_Security", "MVC_Security\MVC_Security.csproj", "{FB52C077-DD5D-4EF2-A0C4-29333C448F88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BierenMetSecurity", "BierenMetSecurity\BierenMetSecurity.csproj", "{6DD2BCF0-69B1-419C-904C-99489E1DA0B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testlogins", "testlogins\testlogins.csproj", "{0F6EDADC-7F88-458A-934B-C3E21E064397}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC_Cultuurhuis", "MVC_Cultuurhuis\MVC_Cultuurhuis.csproj", "{033734A1-0E05-4BBC-8E79-841F3F8E1260}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{65822852-F591-4BB5-B3ED-629A95FC65B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65822852-F591-4BB5-B3ED-629A95FC65B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65822852-F591-4BB5-B3ED-629A95FC65B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65822852-F591-4BB5-B3ED-629A95FC65B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C3AD215-1573-4B19-A861-7D2ADEC3A286}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C3AD215-1573-4B19-A861-7D2ADEC3A286}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C3AD215-1573-4B19-A861-7D2ADEC3A286}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C3AD215-1573-4B19-A861-7D2ADEC3A286}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB52C077-DD5D-4EF2-A0C4-29333C448F88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB52C077-DD5D-4EF2-A0C4-29333C448F88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB52C077-DD5D-4EF2-A0C4-29333C448F88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB52C077-DD5D-4EF2-A0C4-29333C448F88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DD2BCF0-69B1-419C-904C-99489E1DA0B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DD2BCF0-69B1-419C-904C-99489E1DA0B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DD2BCF0-69B1-419C-904C-99489E1DA0B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DD2BCF0-69B1-419C-904C-99489E1DA0B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F6EDADC-7F88-458A-934B-C3E21E064397}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F6EDADC-7F88-458A-934B-C3E21E064397}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F6EDADC-7F88-458A-934B-C3E21E064397}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F6EDADC-7F88-458A-934B-C3E21E064397}.Release|Any CPU.Build.0 = Release|Any CPU
+		{033734A1-0E05-4BBC-8E79-841F3F8E1260}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{033734A1-0E05-4BBC-8E79-841F3F8E1260}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{033734A1-0E05-4BBC-8E79-841F3F8E1260}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{033734A1-0E05-4BBC-8E79-841F3F8E1260}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

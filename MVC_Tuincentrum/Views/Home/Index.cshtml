@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div class="jumbotron">
+    <h1>@Resources.Teksten.Welkom</h1>
+    <p class="lead">De tuincentrum-website is een voorbeeld website uit de .NET MVC cursus.</p>
+    <p><a href="http://asp.net/mvc" class="btn btn-primary btn-lg">Meer over MVC &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>@Html.ActionLink(Resources.Teksten.Planten, "Index", "Plant")</h2>
+        <p>Overzicht van het plantenassortiment.</p>
+    </div>
+    <div class="col-md-4">
+        <h2>@Html.ActionLink(Resources.Teksten.Soorten, "Index","Soort")</h2>
+        <p>Informatie over de diverse soorten planten</p>
+    </div>
+    <div class="col-md-4">
+        <h2>@Html.ActionLink(Resources.Teksten.Leveranciers, "Index", "Leverancier")</h2>
+        <p>De leveranciersgegevens.</p>
+    </div>
+    <a href="@Url.RouteUrl("AllePlanten")" class="btn btn-default">Alle Planten</a>
+    <a href="@Url.RouteUrl("PlantenVanEenLeverancier", new { levnr=3})" class="btn btn-default">Plantenlijst leverancier 3</a>
+</div>

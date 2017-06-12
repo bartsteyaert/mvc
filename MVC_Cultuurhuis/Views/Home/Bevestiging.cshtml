@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Bevestiging";
+}
+
+<div class="jumbotron">
+    <h1>Het Cultuurhuis <img src="~/Images/bevestig.png" alt="bevestiging reservaties"/></h1>
+    <p>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-primary btn-lg">Tickets kiezen &raquo;</a> 
+        <a href="@Url.Action("Mandje", "Home")" class="btn btn-primary btn-lg">Winkelmandje &raquo;</a>
+    </p>
+</div>
+@if (Session["klant"] != null)
+{
+    var klant = (MVC_Cultuurhuis.Models.Klant)Session["Klant"];
+    ViewBag.klant = klant.Voornaam + " " + klant.Familienaam + " " + klant.Straat + " " +
+        klant.HuisNr + " " + klant.Postcode + " " + klant.Gemeente;
+}
+<form method="post" action="~/Home/Bevestiging" class="form-horizontal">
+    <h2>Stap 1: Wie ben je?</h2>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="naam">Gebruikersnaam</label>
+        <div class="col-md-10">
+            <input type="text" class="form-control" id="naam" placeholder="Gebruikersnaam" name="naam"
+                   @if (ViewBag.klant != null) { <text>disabled</text>}>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="passwoord">Wachtwoord</label>
+        <div class="col-md-10">
+            <input type="password" class="form-control" id="passwoord" name="passwoord"
+                   @if (ViewBag.klant != null) { <text>disabled</text>}>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" name="zoek" value="Zoek me op" class="btn"
+                    @if (ViewBag.klant != null) { <text>disabled</text>}/>
+            <input type="submit" name="nieuw" value="Ik ben nieuw" class="btn" 
+                   @if (ViewBag.klant != null) { <text>disabled</text>}/>
+        </div>
+    </div>
+    @if (ViewBag.klant != null)
+    {
+        <p class="alert alert-success">@ViewBag.klant</p>
+    }
+    @if(ViewBag.errorMessage != null)
+    {
+        <p class="alert alert-danger">@ViewBag.errorMessage</p>
+    }
+
+    <h2>Stap 2: Bevestigen</h2>
+    <p>
+        <input type="submit" name="bevestig" value="Bevestigen" class="btn" 
+               @if (ViewBag.klant == null) { <text>disabled</text>} />
+    </p>
+</form>
+
